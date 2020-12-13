@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".ui.videos.AddVideoActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarVideos"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorWhite">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/arrBackTaddVideo"
+                android:layout_width="52dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_arrow_back_dark" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="52dp"
+                android:layout_marginEnd="12dp"
+                android:fontFamily="@font/amarante"
+                android:gravity="center_vertical"
+                android:text="@string/add_new_video"
+                android:textSize="22sp" />
+
+        </RelativeLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appBarVideos">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/linkTextInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="34dp"
+                android:layout_marginTop="16sp"
+                android:layout_marginEnd="26sp"
+                android:background="@color/transparent">
+
+                <EditText
+                    android:id="@+id/linkEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:background="@color/colorWhite"
+                    android:drawableEnd="@drawable/ic_baseline_person_24"
+                    android:hint="@string/enterLink"
+                    android:inputType="textPersonName"
+                    android:maxLength="100"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="12sp"
+                    android:textSize="18sp"
+                    tools:ignore="TextFields" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:layout_below="@+id/linkTextInput"
+                android:layout_marginStart="32sp"
+                android:layout_marginEnd="24dp"
+                android:background="#3B73D0" />
+
+            <TextView
+                android:id="@+id/linkError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view1"
+                android:layout_marginStart="32sp"
+                android:layout_marginTop="2dp"
+                android:text="@string/requiredField"
+                android:textColor="#EA0808"
+                android:textSize="10sp"
+                android:visibility="gone"
+                tools:ignore="SmallSp" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/descTextInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view1"
+                android:layout_marginStart="34dp"
+                android:layout_marginTop="22sp"
+                android:layout_marginEnd="26sp"
+                android:background="@color/transparent">
+
+                <EditText
+                    android:id="@+id/descEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:drawableEnd="@drawable/ic_baseline_info_24"
+                    android:gravity="top"
+                    android:hint="@string/decription"
+                    android:inputType="textMultiLine"
+                    android:maxLength="250"
+                    android:minHeight="52dp"
+                    android:paddingStart="0dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="12sp"
+                    android:textSize="16sp"
+                    tools:ignore="TextFields" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:layout_below="@+id/descTextInput"
+                android:layout_marginStart="32sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:background="#3B73D0" />
+
+            <TextView
+                android:id="@+id/descError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view2"
+                android:layout_marginStart="32sp"
+                android:layout_marginTop="2dp"
+                android:text="@string/requiredField"
+                android:textColor="#EA0808"
+                android:textSize="10sp"
+                android:visibility="gone"
+                tools:ignore="SmallSp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/view2"
+                android:layout_marginBottom="32dp" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/buttonAdd"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/back_button_blue"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="@string/add_new_video"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp" />
+
+    <ProgressBar
+        android:id="@+id/prBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+</RelativeLayout>

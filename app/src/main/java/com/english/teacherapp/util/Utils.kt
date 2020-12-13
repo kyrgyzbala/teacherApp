@@ -20,6 +20,8 @@ const val CHOOSE_IMAGE_REQUEST = 121
 
 const val EXTRA_CODE_SENT_PWD = "EXTRA_CODE_SENT_PWD"
 const val EXTRA_MODEL_TOKEN = "EXTRA_MODEL_TOKEN"
+const val EXTRA_LEVEL = "EXTRA_LEVEL"
+const val EXTRA_TYPE = "EXTRA_TYPE"
 
 fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

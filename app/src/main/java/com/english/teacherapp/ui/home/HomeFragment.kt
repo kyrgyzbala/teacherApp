@@ -1,5 +1,6 @@
 package com.english.teacherapp.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.english.teacherapp.R
 import com.english.teacherapp.databinding.FragmentHomeBinding
+import com.english.teacherapp.ui.home.types.TypesActivity
 import com.english.teacherapp.ui.home.util.ModelLevel
+import com.english.teacherapp.util.EXTRA_LEVEL
 import com.english.teacherapp.util.toast
 
 
@@ -51,5 +54,9 @@ class HomeFragment : Fragment(), LevelRecyclerView.LevelClickListener {
 
     override fun onLevelClick(position: Int) {
         requireActivity().toast("clicked $position")
+        val current = adapter.getItemAt(position)
+        val intent = Intent(requireContext(), TypesActivity::class.java)
+        intent.putExtra(EXTRA_LEVEL, current)
+        startActivity(intent)
     }
 }
