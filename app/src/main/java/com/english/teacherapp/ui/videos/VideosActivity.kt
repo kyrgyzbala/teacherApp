@@ -12,14 +12,15 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
-class VideosActivity : AppCompatActivity() {
+class VideosActivity : AppCompatActivity(), VideosRecyclerView.VideosClickListener,
+    CustomDelete.CustomDeleteClickListener {
 
     private lateinit var binding: ActivityVideosBinding
 
     private var level: ModelLevel? = null
     private var type: ModelLevel? = null
 
-    private  var adapter: VideosRecyclerView? = null
+    private var adapter: VideosRecyclerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,9 +65,19 @@ class VideosActivity : AppCompatActivity() {
         val options: FirestoreRecyclerOptions<ModelVideo> =
             FirestoreRecyclerOptions.Builder<ModelVideo>().setQuery(query, ModelVideo::class.java)
                 .build()
-        adapter = VideosRecyclerView(options, lifecycle)
+        adapter = VideosRecyclerView(options, lifecycle, this)
         binding.recyclerViewVideos.setHasFixedSize(true)
         binding.recyclerViewVideos.adapter = adapter
         adapter?.startListening()
+    }
+
+    override fun onVideoLongClick(position: Int) {
+        val ref = adapter!!.snapshots.getSnapshot(position).reference.path
+        val dialog = CustomDelete(ref, "Delete this video?", this)
+        dialog.show(supportFragmentManager, "Delete video?")
+    }
+
+    override fun onDeleteConfirm(ref: String) {
+        FirebaseFirestore.getInstance().document(ref).delete()
     }
 }

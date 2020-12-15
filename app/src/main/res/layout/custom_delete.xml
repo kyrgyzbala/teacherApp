@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back_quit">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/topButtonDialogDelete"
+            android:layout_width="42dp"
+            android:layout_height="6dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            app:cardBackgroundColor="#cecece"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp" />
+
+        <TextView
+            android:id="@+id/textViewDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/topButtonDialogDelete"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="16sp"
+            android:layout_marginEnd="34dp"
+            android:gravity="center"
+            android:textColor="@color/textColorDark"
+            android:textSize="18sp"
+            tools:text="Delete video?" />
+
+        <TextView
+            android:id="@+id/deleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewDelete"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/delete"
+            android:textColor="#ED0404"
+            android:textSize="19sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.4dp"
+            android:layout_below="@+id/deleteButton"
+            android:background="#cecece" />
+
+        <TextView
+            android:id="@+id/cancelButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/deleteButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="22dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/cancello"
+            android:textColor="@color/colorPrimary"
+            android:textSize="19sp" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

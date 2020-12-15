@@ -50,4 +50,6 @@
     <string name="enterLink">Enter youtube link</string>
     <string name="decription">Video Description</string>
     <string name="add_new_video">Add new video</string>
+    <string name="cancello">Cancel</string>
+    <string name="delete">Delete</string>
 </resources>

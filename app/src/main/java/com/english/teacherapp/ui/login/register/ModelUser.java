@@ -1,10 +1,23 @@
 package com.english.teacherapp.ui.login.register;
 
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.ServerTimestamp;
+
 public class ModelUser {
 
     private String name;
     private String logo;
     private Boolean isProfileDone;
+    @ServerTimestamp
+    private Timestamp time;
+
+    public Timestamp getTime() {
+        return time;
+    }
+
+    public void setTime(Timestamp time) {
+        this.time = time;
+    }
 
     public ModelUser() {
     }

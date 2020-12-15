@@ -19,7 +19,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.You
 
 class VideosRecyclerView(
     options: FirestoreRecyclerOptions<ModelVideo>,
-    private val lifecycle: Lifecycle
+    private val lifecycle: Lifecycle,
+    private val listener: VideosClickListener
 ) :
     FirestoreRecyclerAdapter<ModelVideo, VideosRecyclerView.ViewHolderV>(options) {
 
@@ -63,6 +64,11 @@ class VideosRecyclerView(
 
             binding.descTextViewLiveStream.text = modelVideo.description
 
+            binding.root.setOnLongClickListener {
+                listener.onVideoLongClick(adapterPosition)
+                return@setOnLongClickListener true
+            }
+
         }
 
         private fun getYoutube(url: String): String {
@@ -85,6 +91,10 @@ class VideosRecyclerView(
             }
         }
 
+    }
+
+    interface VideosClickListener {
+        fun onVideoLongClick(position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderV {
