@@ -52,4 +52,26 @@
     <string name="add_new_video">Add new video</string>
     <string name="cancello">Cancel</string>
     <string name="delete">Delete</string>
+    <string name="ago">ago</string>
+    <string name="chatEmpty">Chat is Empty \n Choose any teacher to ask questions</string>
+    <string name="send_message_hint">Type here …</string>
+    <string name="internetErrorMessage">Error loading user data and chat! Please try again!</string>
+    <string name="quizzes">Quizzes</string>
+    <string name="questions_">Questions</string>
+    <string name="_1">1</string>
+    <string name="createNewCategory">Add new quiz</string>
+    <string name="quiz_name">Quiz name</string>
+    <string name="add">Add</string>
+    <string name="a">A)</string>
+    <string name="b">B)</string>
+    <string name="c">C)</string>
+    <string name="d_">D)</string>
+    <string name="add_new_question">Add new question</string>
+    <string name="question">Question</string>
+    <string name="varA">Variant A</string>
+    <string name="varB">Variant B</string>
+    <string name="varC">Variant C</string>
+    <string name="varD">Variant D</string>
+    <string name="choose_true_answer">Choose true answer</string>
+
 </resources>

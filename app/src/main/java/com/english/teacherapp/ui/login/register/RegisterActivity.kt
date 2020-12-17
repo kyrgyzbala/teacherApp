@@ -13,6 +13,7 @@ import com.english.teacherapp.util.hide
 import com.english.teacherapp.util.show
 import com.english.teacherapp.util.toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
@@ -57,8 +58,13 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun registerNewUser() {
         val displayName = binding.nameEditTextRegister2.text.toString()
-        val model = ModelUser(displayName, loadedImg, true)
         val user = FirebaseAuth.getInstance().currentUser!!
+        val request = UserProfileChangeRequest.Builder().setDisplayName(displayName).build()
+        user.updateProfile(request)
+
+        val model = ModelUser(displayName, loadedImg, true)
+        model.uid = user.uid
+
         FirebaseFirestore.getInstance().collection("teachers").document(user.uid)
             .set(model, SetOptions.merge())
             .addOnSuccessListener {

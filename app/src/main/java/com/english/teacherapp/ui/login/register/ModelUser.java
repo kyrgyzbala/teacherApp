@@ -10,6 +10,15 @@ public class ModelUser {
     private Boolean isProfileDone;
     @ServerTimestamp
     private Timestamp time;
+    private String uid;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public Timestamp getTime() {
         return time;

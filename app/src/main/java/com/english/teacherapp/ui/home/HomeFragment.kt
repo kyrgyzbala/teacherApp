@@ -53,7 +53,6 @@ class HomeFragment : Fragment(), LevelRecyclerView.LevelClickListener {
     }
 
     override fun onLevelClick(position: Int) {
-        requireActivity().toast("clicked $position")
         val current = adapter.getItemAt(position)
         val intent = Intent(requireContext(), TypesActivity::class.java)
         intent.putExtra(EXTRA_LEVEL, current)

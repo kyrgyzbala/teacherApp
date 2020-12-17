@@ -8,6 +8,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.english.teacherapp.R
 import com.english.teacherapp.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -58,6 +61,24 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
         })
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val user = FirebaseAuth.getInstance().currentUser!!
+        val map = mutableMapOf<String, String>()
+        map["status"] = "online"
+        FirebaseFirestore.getInstance().collection("users").document(user.uid)
+            .set(map, SetOptions.merge())
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val user = FirebaseAuth.getInstance().currentUser!!
+        val map = mutableMapOf<String, String>()
+        map["status"] = "offline"
+        FirebaseFirestore.getInstance().collection("users").document(user.uid)
+            .set(map, SetOptions.merge())
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
