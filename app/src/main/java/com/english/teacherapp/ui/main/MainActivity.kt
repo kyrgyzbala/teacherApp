@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val user = FirebaseAuth.getInstance().currentUser!!
         val map = mutableMapOf<String, String>()
         map["status"] = "online"
-        FirebaseFirestore.getInstance().collection("users").document(user.uid)
+        FirebaseFirestore.getInstance().collection("teachers").document(user.uid)
             .set(map, SetOptions.merge())
     }
 
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val user = FirebaseAuth.getInstance().currentUser!!
         val map = mutableMapOf<String, String>()
         map["status"] = "offline"
-        FirebaseFirestore.getInstance().collection("users").document(user.uid)
+        FirebaseFirestore.getInstance().collection("teachers").document(user.uid)
             .set(map, SetOptions.merge())
     }
 

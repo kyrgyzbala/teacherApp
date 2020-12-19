@@ -90,7 +90,6 @@ class QuizzesActivity : AppCompatActivity(), QuizzesRecyclerViewAdapter.QuizClic
 
     override fun onQuizClick(modelQuiz: ModelQuiz, position: Int) {
         val ref = adapter!!.snapshots.getSnapshot(position).reference.path
-
         val intent = Intent(this, QuestionsActivity::class.java)
         intent.putExtra(EXTRA_QUIZ, modelQuiz)
         intent.putExtra(EXTRA_QUIZ_REF, ref)

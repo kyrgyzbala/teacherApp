@@ -1,6 +1,8 @@
 package com.english.teacherapp.ui.chat
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -11,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.english.teacherapp.databinding.ActivityPrivateChatBinding
 import com.english.teacherapp.ui.chat.util.MessagesRecyclerViewAdapter
 import com.english.teacherapp.ui.chat.util.ModelMessage
-import com.english.teacherapp.util.EXTRA_TEACHER_ID
+import com.english.teacherapp.util.EXTRA_CHAT_ID
 import com.english.teacherapp.util.hide
 import com.english.teacherapp.util.toast
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -20,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.SetOptions
 import java.util.*
 
 class PrivateChatActivity : AppCompatActivity() {
@@ -39,10 +42,10 @@ class PrivateChatActivity : AppCompatActivity() {
 
         window.statusBarColor = Color.WHITE
 
-        userId = intent.getStringExtra(EXTRA_TEACHER_ID)!!
+        userId = intent.getStringExtra(EXTRA_CHAT_ID)!!
 
         binding.sendMessageButton.alpha = 0.4F
-        initTeacherData()
+        initUserData()
         addListener()
 
         binding.arrBackPrivateChat.setOnClickListener {
@@ -59,6 +62,10 @@ class PrivateChatActivity : AppCompatActivity() {
             }
         }
 
+        val map = mutableMapOf<String, Any>()
+        map["lastMessageRead"] = true
+        val ref = db.collection("chats").document(userId + user!!.uid)
+        ref.set(map, SetOptions.merge())
     }
 
     private fun sendNewMessage(user: FirebaseUser) {
@@ -66,12 +73,19 @@ class PrivateChatActivity : AppCompatActivity() {
             binding.messageEditText.text.toString(),
             user.uid, userId, user.displayName, Timestamp(Date()), false
         )
-        val ref = db.collection("chats").document(userId + user.uid).collection("messages")
-        ref.add(modelMessage).addOnSuccessListener {
+        val ref = db.collection("chats").document(userId + user.uid)
+        ref.collection("messages").add(modelMessage).addOnSuccessListener {
             binding.messageEditText.setText("")
             binding.sendMessageButton.alpha = 0.4F
-
             binding.recyclerViewPrivateChat.smoothScrollToPosition(0)
+        }
+        val map = mutableMapOf<String, Any>()
+        map["lastMessage"] = modelMessage.message
+        map["lastMessageSender"] = modelMessage.sender
+        map["lastMessageTime"] = Timestamp(Date())
+        map["lastMessageRead"] = false
+        ref.set(map, SetOptions.merge()).addOnSuccessListener {
+            Log.d("dadada", "sendNewMessage: last update")
         }
     }
 
@@ -83,6 +97,8 @@ class PrivateChatActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (binding.messageEditText.text.toString().isNotEmpty())
                     binding.sendMessageButton.alpha = 1F
+                else
+                    binding.sendMessageButton.alpha = 0.5f
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -139,18 +155,25 @@ class PrivateChatActivity : AppCompatActivity() {
     }
 
 
-    private fun initTeacherData() {
+    private fun initUserData() {
         db.collection("users").document(userId).get().addOnSuccessListener {
             if (it.exists()) {
                 val logo = it.getString("logo")
                 val name = it.getString("name")
                 val status = it.getString("status")
+                val phoneNumber = it.getString("phoneNumber")
 
                 if (!logo.isNullOrEmpty())
                     Glide.with(this).load(logo).into(binding.avatarPrivateChat)
                 binding.userNamePrivateChat.title = name
                 Log.d("NURIKO", "initTeacherData: $status")
                 binding.prBarPrivateChat.hide()
+
+                binding.callUserPrivateChat.setOnClickListener {
+                    val callIntent = Intent(Intent.ACTION_DIAL)
+                    callIntent.data = Uri.parse("tel:$phoneNumber")
+                    startActivity(callIntent)
+                }
             } else {
                 toast("User does not exist!")
             }

@@ -7,6 +7,7 @@ import com.english.teacherapp.databinding.ActivityQuestionsBinding
 import com.english.teacherapp.ui.quizzes.util.ModelQuestion
 import com.english.teacherapp.ui.quizzes.util.ModelQuiz
 import com.english.teacherapp.ui.quizzes.util.QuestionRecyclerViewAdapter
+import com.english.teacherapp.ui.videos.CustomDelete
 import com.english.teacherapp.util.EXTRA_QUIZ
 import com.english.teacherapp.util.EXTRA_QUIZ_REF
 import com.english.teacherapp.util.toast
@@ -15,7 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 
 class QuestionsActivity : AppCompatActivity(), QuestionRecyclerViewAdapter.QuestionClickListener,
-    CustomAddQuestion.CustomAddQuestionListener {
+    CustomAddQuestion.CustomAddQuestionListener, CustomDelete.CustomDeleteClickListener {
 
     private lateinit var binding: ActivityQuestionsBinding
 
@@ -87,12 +88,18 @@ class QuestionsActivity : AppCompatActivity(), QuestionRecyclerViewAdapter.Quest
     }
 
     override fun onOnDeleteQuestion(position: Int) {
-        toast("Delete $position")
+        val ref = adapter!!.snapshots.getSnapshot(position).reference.path
+        val dialog = CustomDelete(ref, "Delete this question?", this)
+        dialog.show(supportFragmentManager, "DeleteQuestion")
     }
 
     override fun onStop() {
         super.onStop()
         adapter?.stopListening()
+    }
+
+    override fun onDeleteConfirm(ref: String) {
+        FirebaseFirestore.getInstance().document(ref).delete()
     }
 
 }

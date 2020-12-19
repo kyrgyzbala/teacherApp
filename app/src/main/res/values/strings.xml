@@ -72,6 +72,12 @@
     <string name="varB">Variant B</string>
     <string name="varC">Variant C</string>
     <string name="varD">Variant D</string>
-    <string name="choose_true_answer">Choose true answer</string>
+    <string name="choose_true_answer">Choose correct answer</string>
+    <string name="chatsss">Chat</string>
+    <string name="notes">Notes</string>
+    <string name="add_new_notes">Add new notes</string>
+    <string name="topic_name">Topic name</string>
+    <string name="link">Link</string>
+    <string name="chat_is_empty">Chat is empty</string>
 
 </resources>

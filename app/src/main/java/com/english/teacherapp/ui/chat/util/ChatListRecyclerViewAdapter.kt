@@ -58,7 +58,7 @@ class ChatListRecyclerViewAdapter(
             }
 
             binding.root.setOnClickListener {
-                listener.onChatClick(modelChat.teacherId)
+                listener.onChatClick(modelChat.userId)
             }
         }
 
@@ -93,7 +93,7 @@ class ChatListRecyclerViewAdapter(
     }
 
     interface ChatListClickListener {
-        fun onChatClick(teacherId: String)
+        fun onChatClick(userId: String)
         fun sizeNotZero()
     }
 

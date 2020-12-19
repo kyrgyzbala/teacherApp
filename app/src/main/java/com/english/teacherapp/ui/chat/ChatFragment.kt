@@ -10,6 +10,7 @@ import com.english.teacherapp.R
 import com.english.teacherapp.databinding.FragmentChatBinding
 import com.english.teacherapp.ui.chat.util.ChatListRecyclerViewAdapter
 import com.english.teacherapp.ui.chat.util.ModelChat
+import com.english.teacherapp.util.EXTRA_CHAT_ID
 import com.english.teacherapp.util.EXTRA_TEACHER_ID
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -46,7 +47,7 @@ class ChatFragment : Fragment(), ChatListRecyclerViewAdapter.ChatListClickListen
         binding.recyclerView.setHasFixedSize(true)
 
         val query =
-            FirebaseFirestore.getInstance().collection("chats").whereEqualTo("userId", user.uid)
+            FirebaseFirestore.getInstance().collection("chats").whereEqualTo("teacherId", user.uid)
                 .orderBy("lastMessageTime", Query.Direction.DESCENDING)
         val options: FirestoreRecyclerOptions<ModelChat> =
             FirestoreRecyclerOptions.Builder<ModelChat>().setQuery(query, ModelChat::class.java)
@@ -61,9 +62,9 @@ class ChatFragment : Fragment(), ChatListRecyclerViewAdapter.ChatListClickListen
         adapter?.stopListening()
     }
 
-    override fun onChatClick(teacherId: String) {
+    override fun onChatClick(userId: String) {
         val intent = Intent(requireContext(), PrivateChatActivity::class.java)
-        intent.putExtra(EXTRA_TEACHER_ID, teacherId)
+        intent.putExtra(EXTRA_CHAT_ID, userId)
         startActivity(intent)
     }
 

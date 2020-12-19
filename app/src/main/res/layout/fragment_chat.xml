@@ -7,10 +7,28 @@
     android:background="@color/colorWhite"
     tools:context=".ui.chat.ChatFragment">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorWhite">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="32sp"
+            android:fontFamily="@font/amarante"
+            android:gravity="center_vertical"
+            android:text="@string/chatsss"
+            android:textSize="21sp" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appBar">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -30,7 +48,7 @@
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/roboto_medium"
         android:gravity="center"
-        android:text="@string/chatEmpty"
+        android:text="@string/chat_is_empty"
         android:textSize="18sp" />
 
 </RelativeLayout>

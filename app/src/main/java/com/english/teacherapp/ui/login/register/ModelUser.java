@@ -12,6 +12,16 @@ public class ModelUser {
     private Timestamp time;
     private String uid;
 
+    private String phoneNumber;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getUid() {
         return uid;
     }

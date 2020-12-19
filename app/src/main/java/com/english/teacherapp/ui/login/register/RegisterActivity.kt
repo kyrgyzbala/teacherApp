@@ -64,7 +64,7 @@ class RegisterActivity : AppCompatActivity() {
 
         val model = ModelUser(displayName, loadedImg, true)
         model.uid = user.uid
-
+        model.phoneNumber = user.phoneNumber
         FirebaseFirestore.getInstance().collection("teachers").document(user.uid)
             .set(model, SetOptions.merge())
             .addOnSuccessListener {
