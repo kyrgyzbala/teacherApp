@@ -52,6 +52,9 @@ class QuestionsActivity : AppCompatActivity(), QuestionRecyclerViewAdapter.Quest
         }
     }
 
+    /**
+     * @Function Adds new question for current quiz
+     */
     override fun onAddNewQuestion(modelQuestion: ModelQuestion) {
         val docRef = FirebaseFirestore.getInstance().document(ref!!).collection("questions")
         docRef.add(modelQuestion).addOnSuccessListener {

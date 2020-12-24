@@ -55,10 +55,12 @@ class VideosActivity : AppCompatActivity(), VideosRecyclerView.VideosClickListen
         adapter?.stopListening()
     }
 
+    /**
+     * @Function initializes list of videos
+     */
     private fun initRecyclerView() {
 
         val lifecycle = lifecycle
-
         val db = FirebaseFirestore.getInstance()
         val query = db.collection("videos").whereEqualTo("level", level!!.code)
             .orderBy("date", Query.Direction.DESCENDING)
@@ -71,12 +73,18 @@ class VideosActivity : AppCompatActivity(), VideosRecyclerView.VideosClickListen
         adapter?.startListening()
     }
 
+    /**
+     * Asks for deletion confirmation on longClick
+     */
     override fun onVideoLongClick(position: Int) {
         val ref = adapter!!.snapshots.getSnapshot(position).reference.path
         val dialog = CustomDelete(ref, "Delete this video?", this)
         dialog.show(supportFragmentManager, "Delete video?")
     }
 
+    /**
+     * Deletes video
+     */
     override fun onDeleteConfirm(ref: String) {
         FirebaseFirestore.getInstance().document(ref).delete()
     }

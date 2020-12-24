@@ -16,6 +16,11 @@ import com.english.teacherapp.util.EXTRA_LEVEL
 import com.english.teacherapp.util.EXTRA_TYPE
 import com.english.teacherapp.util.toast
 
+/**
+ * @Activity
+ * List of types, Notes, Quizzes and Videos
+ */
+
 class TypesActivity : AppCompatActivity(), LevelRecyclerView.LevelClickListener {
 
     private lateinit var binding: ActivityTypesBinding
@@ -41,6 +46,10 @@ class TypesActivity : AppCompatActivity(), LevelRecyclerView.LevelClickListener 
 
         binding.textViewTitle.text = currentLevel?.name
 
+        /**
+         * Inits list, creates recyclerViewAdapter
+         * sets recyclerViewAdapter to the list
+         */
         generateLevels()
         adapter = LevelRecyclerView(this)
         binding.recyclerViewTypes.setHasFixedSize(true)
@@ -48,6 +57,10 @@ class TypesActivity : AppCompatActivity(), LevelRecyclerView.LevelClickListener 
         adapter.submitList(levels)
     }
 
+    /**
+     * @Function
+     * Generates List of types
+     */
     private fun generateLevels() {
         levels = mutableListOf(
             ModelLevel(1, "Lecture Notes", R.drawable.lesson),
@@ -56,6 +69,9 @@ class TypesActivity : AppCompatActivity(), LevelRecyclerView.LevelClickListener 
         )
     }
 
+    /**
+     * Opens activity according to selected type
+     */
     override fun onLevelClick(position: Int) {
         val type = adapter.getItemAt(position)
         when (type.code) {

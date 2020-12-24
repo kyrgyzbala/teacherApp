@@ -53,6 +53,9 @@ class QuizzesActivity : AppCompatActivity(), QuizzesRecyclerViewAdapter.QuizClic
 
     }
 
+    /**
+     * Create new quiz
+     */
     override fun onAddQuiz(level: ModelLevel, name: String) {
         val modelQuiz = ModelQuiz(
             name, level.code, 0
@@ -64,6 +67,9 @@ class QuizzesActivity : AppCompatActivity(), QuizzesRecyclerViewAdapter.QuizClic
             }
     }
 
+    /**
+     * inits list of quizzes
+     */
     private fun initRecyclerView(code: Int) {
         binding.recyclerView.setHasFixedSize(true)
         val query = FirebaseFirestore.getInstance().collection("quizzes")
@@ -88,6 +94,9 @@ class QuizzesActivity : AppCompatActivity(), QuizzesRecyclerViewAdapter.QuizClic
         adapter?.stopListening()
     }
 
+    /**
+     * Opens Questions activity according to selected Quiz
+     */
     override fun onQuizClick(modelQuiz: ModelQuiz, position: Int) {
         val ref = adapter!!.snapshots.getSnapshot(position).reference.path
         val intent = Intent(this, QuestionsActivity::class.java)

@@ -68,6 +68,9 @@ class NotesActivity : AppCompatActivity(), CustomAddNotes.CustomAddNotesListener
         adapter?.startListening()
     }
 
+    /**
+     * Creates new note
+     */
     override fun addNoteConfirmed(name: String, link: String) {
         val modelNote = ModelNote(name, link)
         modelNote.level = level!!.code
@@ -77,19 +80,29 @@ class NotesActivity : AppCompatActivity(), CustomAddNotes.CustomAddNotesListener
             }
     }
 
-    override fun onClickNote(modelNote: ModelNote) {
-        val intent = Intent(this, ViewNoteActivity::class.java)
-        intent.putExtra(EXTRA_NOTE_MODEL, modelNote)
-        startActivity(intent)
-    }
-
+    /**
+     * Asks for confirmation on delete
+     */
     override fun onDeleteNote(position: Int) {
         val ref = adapter!!.snapshots.getSnapshot(position).reference.path
         val dialog = CustomDelete(ref, "Delete this note?", this)
         dialog.show(supportFragmentManager, "Delete note")
     }
 
+    /**
+     * Deletes selected note if deletion has been confirmed
+     */
     override fun onDeleteConfirm(ref: String) {
         FirebaseFirestore.getInstance().document(ref).delete()
+    }
+
+
+    /**
+     * On Click note
+     */
+    override fun onClickNote(modelNote: ModelNote) {
+        val intent = Intent(this, ViewNoteActivity::class.java)
+        intent.putExtra(EXTRA_NOTE_MODEL, modelNote)
+        startActivity(intent)
     }
 }

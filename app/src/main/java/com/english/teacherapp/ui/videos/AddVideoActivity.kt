@@ -39,6 +39,9 @@ class AddVideoActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * @Function Adds new video
+     */
     private fun uploadVideo(modelVideo: ModelVideo) {
         FirebaseFirestore.getInstance().collection("videos").add(modelVideo).addOnSuccessListener {
             toast("New video added successfully!")
